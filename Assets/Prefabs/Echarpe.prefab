@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519678129070954151}
   - component: {fileID: 7042725011840994107}
+  - component: {fileID: 620760315263616255}
   m_Layer: 0
   m_Name: Echarpe
   m_TagString: Untagged
@@ -146,3 +147,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &620760315263616255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050700313016808453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c061d8e56de16046ab780bec4bc38b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
