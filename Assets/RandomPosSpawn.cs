@@ -9,13 +9,11 @@ public class RandomPosSpawn : MonoBehaviour
     [SerializeField] private Transform[] _tpPoints;
 
     private int _randomNumber;
-    void Awake()
-    {
-        _randomNumber = Random.Range(0, _tpPoints.Length);    
-    }
 
-    private void Start()
+    public void ChoosePosition()
     {
+        gameObject.SetActive(true);
+        _randomNumber = Random.Range(0, _tpPoints.Length);    
         transform.position = _tpPoints[_randomNumber].position;
     }
 }
