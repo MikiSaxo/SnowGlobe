@@ -8,10 +8,16 @@ public class PlayerGetObjects : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.GetComponent<Carotte>())
-            print("carotte");
+            GetObject(0, collision.gameObject);
         if(collision.gameObject.GetComponent<Echarpe>())
-            print("echarpe");
+            GetObject(1, collision.gameObject);
         if(collision.gameObject.GetComponent<Chapeau>())
-            print("chapeau");
+            GetObject(2, collision.gameObject);
+    }
+
+    private void GetObject(int index, GameObject obj)
+    {
+        obj.SetActive(false);
+        Manager.Instance.ObjectGet(index);
     }
 }
