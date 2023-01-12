@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,22 @@ using DG.Tweening;
 
 public class PlayerCam : MonoBehaviour
 {
-    public float sensX;
-    public float sensY;
+    public static PlayerCam Instance;
 
-    public Transform orientation;
-    public Transform camHolder;
+    [SerializeField] private float _sensX;
+    [SerializeField] private float _sensY;
 
-    float xRotation;
-    float yRotation;
+    [SerializeField] private Transform _orientation;
+    [SerializeField] private Transform _camHolder;
+
+    private float _xRotation;
+    private float _yRotation;
+    private bool _canMove;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -20,20 +29,27 @@ public class PlayerCam : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void UpdateMove(bool moveOrNot)
+    {
+        _canMove = moveOrNot;
+    }
+
     private void Update()
     {
+        if (!_canMove) return;
+        
         // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * _sensX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * _sensY;
 
-        yRotation += mouseX;
+        _yRotation += mouseX;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         // rotate cam and orientation
-        camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        _camHolder.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+        _orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
     }
 
     public void DoFov(float endValue)
