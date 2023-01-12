@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShakeCam : MonoBehaviour
+public class ShakeObj : MonoBehaviour
 {
     [SerializeField] private AnimationCurve curve;
     [SerializeField] private float durationShaking = 0f;
 
-    public static ShakeCam Instance;
+    public static ShakeObj Instance;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void StartShakingCam(float _addTime) //Fonction a appeler pour lancer la coroutine
+    public void StartShakingCam(float addTime)
     {
-        StartCoroutine(Shaking(_addTime));
+        StartCoroutine(Shaking(addTime));
     }
 
-    private IEnumerator Shaking(float _timeAdded)
+    private IEnumerator Shaking(float timeAdded)
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;
 
-        var _addDuration = _timeAdded + durationShaking;
+        var _addDuration = timeAdded + durationShaking;
 
         while (elapsedTime < _addDuration)
         {

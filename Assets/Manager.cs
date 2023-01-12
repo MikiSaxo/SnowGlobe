@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Collections;
 
 public class Manager : MonoBehaviour
 {
@@ -16,9 +18,11 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] _objects;
 
     [Header("Chrono")] [SerializeField] private TextMeshProUGUI _chronoText;
-    [SerializeField] private float _chrono;
+    [Tooltip("In seconds")] [SerializeField] private float[] _chrono;
 
     private float _actualChrono;
+    private int _countObj;
+    private int _actualLevel;
 
     private void Awake()
     {
@@ -34,10 +38,8 @@ public class Manager : MonoBehaviour
     {
         print("startScene");
 
-        // ShakeCam.Instance.StartShakingCam(0);
-        
-        _actualChrono = _chrono;
-
+        _countObj = 0;
+        _actualChrono = _chrono[_actualLevel];
         _player.transform.position = _spawnPointPlayer.position;
 
         foreach (var obj in _objectsUI)
@@ -48,6 +50,16 @@ public class Manager : MonoBehaviour
         {
             obj.GetComponent<RandomPosSpawn>().ChoosePosition();
         }
+    }
+
+    private void ChangeNextLevel()
+    {
+        _actualLevel++;
+
+        if (_actualLevel >= _chrono.Length)
+            SceneManager.LoadScene(0);
+        else
+            StartScene();
     }
 
     private void Update()
@@ -62,6 +74,9 @@ public class Manager : MonoBehaviour
         }
         else
         {
+            if(ShakeObj.Instance != null)
+                ShakeObj.Instance.StartShakingCam(0);
+            
             StartScene();
         }
     }
@@ -69,5 +84,9 @@ public class Manager : MonoBehaviour
     public void ObjectGet(int index)
     {
         _objectsUI[index].SetActive(true);
+        _countObj++;
+        
+        if(_countObj >= 3)
+            ChangeNextLevel();
     }
 }
