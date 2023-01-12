@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ef4c3ff149818eb45b57bd118fd5a13d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Eleanore
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 871fae2bb3377564983fb37e3c6d4ae0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
