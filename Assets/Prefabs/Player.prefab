@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4400332915649195458}
+  m_Father: {fileID: 4400332916294967117}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &852121405
@@ -4842,8 +4842,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 852121403}
+  m_Children: []
   m_Father: {fileID: 4400332917331502858}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4938,7 +4937,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 852121403}
   m_Father: {fileID: 4400332917331502858}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5038,8 +5038,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4868462d9c712428348bbe77a5bbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeedNormal: 7
-  _groundDragNormal: 5
+  _moveSpeed: 7
+  _groundDrag: 5
+  _jumpForce: 0
+  _jumpCooldown: 0
+  _airMultiplier: 0
   _jumpKey: 32
   _playerHeight: 2
   _whatIsGround:
