@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 63763fc6b21c53746a3ce358f464afd5
   - enabled: 1
-    path: Assets/Scenes/Temp_Sam2.unity
-    guid: 2a1837e23574e8049ba6930d33f04287
+    path: Assets/Scenes/SamMainScene.unity
+    guid: 9abfd1c23bc87a3459b04914ac6f8159
   m_configObjects: {}

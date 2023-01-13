@@ -47,6 +47,7 @@ public class Manager : MonoBehaviour
     {
         _countObj = 0;
         _actualChrono = _chrono[_actualLevel];
+        _chronoText.color = Color.white;
         UpdateChrono();
         _player.transform.position = _spawnPointPlayer.position;
 
@@ -63,6 +64,7 @@ public class Manager : MonoBehaviour
     private void ChangeNextLevel()
     {
         _actualLevel++;
+        BlockOrNotChrono(false);
 
         if (_actualLevel >= _chrono.Length)
             SceneManager.LoadScene(0);
@@ -77,6 +79,9 @@ public class Manager : MonoBehaviour
         var format = time.ToString(@"hh\:mm\:ss");
         format = format.Substring(3,5);
         _chronoText.text = format;
+        
+        if(_actualChrono < 5)
+            _chronoText.color = Color.red;
     }
 
     private void Update()

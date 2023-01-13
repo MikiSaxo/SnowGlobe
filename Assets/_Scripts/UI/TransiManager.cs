@@ -101,7 +101,7 @@ public class TransiManager : MonoBehaviour
         for (int i = 0; i < _iconsObj.Length; i++)
         {
             _iconsObj[i].transform.DOMove(_startPosIconsObj[i], 0);
-            _iconsObj[i].transform.DOScale(5, 0);
+            _iconsObj[i].transform.DOScale(1.5f, 0);
             _instructionsText.DOFade(1, 0);
         }
     }
@@ -112,6 +112,9 @@ public class TransiManager : MonoBehaviour
 
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void LaunchCongrats()
@@ -123,7 +126,6 @@ public class TransiManager : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        //StartCoroutine(Congrats());
     }
 
     public void MoreDifficult()
@@ -133,8 +135,10 @@ public class TransiManager : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
         _congrat.SetActive(false);
         Manager.Instance.StartScene();
+        
         ResetPos();
         LaunchMoveIcon();
     }
@@ -158,19 +162,5 @@ public class TransiManager : MonoBehaviour
     private void GoToMenu()
     {
         SceneManager.LoadScene(0);
-    }
-
-    private IEnumerator Congrats()
-    {
-        _fade.DOFade(1, _timeFadeOn);
-        _congratTxt.DOFade(1, 0f);
-        yield return new WaitForSeconds(_timeFadeOn);
-        _congratTxt.DOFade(0, _timeCongratsOff);
-        _fade.DOFade(0, _timeFadeOff);
-        yield return new WaitForSeconds(_timeFadeOff);
-        
-        ResetPos();
-        LaunchMoveIcon();
-        
     }
 }
