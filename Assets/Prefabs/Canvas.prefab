@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 551724232833410714}
   m_Father: {fileID: 551724232039414921}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -299,8 +299,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 551724232039414921}
-  m_RootOrder: 1
+  m_Father: {fileID: 551724232280344267}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -344,8 +344,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -566,12 +566,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 551724232430877789}
-  - {fileID: 551724231843160089}
   - {fileID: 551724233389945239}
   - {fileID: 551724231775454420}
   m_Father: {fileID: 551724232280344267}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -935,6 +933,8 @@ RectTransform:
   m_Children:
   - {fileID: 551724232893202939}
   - {fileID: 551724232402209706}
+  - {fileID: 551724232430877789}
+  - {fileID: 551724231843160089}
   - {fileID: 551724232039414921}
   m_Father: {fileID: 551724233425261012}
   m_RootOrder: 2
@@ -972,6 +972,7 @@ MonoBehaviour:
   _congratTxt: {fileID: 551724231804597142}
   _congrat: {fileID: 551724232402209705}
   _fail: {fileID: 551724232039414920}
+  _failText: {fileID: 0}
   _timeToMoveIcon: 0.5
   _timeGoFade: 1
   _timeCongratsOff: 0.5
@@ -1390,8 +1391,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 551724232039414921}
-  m_RootOrder: 0
+  m_Father: {fileID: 551724232280344267}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1435,8 +1436,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2305,7 +2306,7 @@ RectTransform:
   m_Children:
   - {fileID: 551724232262996491}
   m_Father: {fileID: 551724232039414921}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

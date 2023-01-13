@@ -22,6 +22,8 @@ public class TransiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _congratTxt;
     [SerializeField] private GameObject _congrat;
     [SerializeField] private GameObject _fail;
+    [SerializeField] private TextMeshProUGUI _failText;
+    [SerializeField] private TextMeshProUGUI _stageText;
     [SerializeField] private float _timeToMoveIcon;
     [SerializeField] private float _timeGoFade;
     [SerializeField] private float _timeCongratsOff;
@@ -108,10 +110,22 @@ public class TransiManager : MonoBehaviour
 
     public void LaunchFail()
     {
-        _fail.SetActive(true);
+        StartCoroutine(Fail());
+    }
 
+    IEnumerator Fail()
+    {
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
+        PlayerMovementTutorial.Instance.BlockRb();
+        
+        yield return new WaitForSeconds(1f);
+        _failText.DOFade(1, 1);
+        yield return new WaitForSeconds(1f);
+        _stageText.text = $"Stage : {Manager.Instance.GetActualLevel()+1}";
+        _stageText.DOFade(1, 1);
+        _fail.SetActive(true);
+
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -145,6 +159,7 @@ public class TransiManager : MonoBehaviour
 
     public void RestartButton()
     {
+        _fade.gameObject.SetActive(true);
         _fade.DOFade(1, _timeFadeOn).OnComplete(GoRestart);
     }
 

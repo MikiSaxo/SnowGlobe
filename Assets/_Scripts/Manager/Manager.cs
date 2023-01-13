@@ -79,10 +79,6 @@ public class Manager : MonoBehaviour
         UpdateChrono();
         _player.transform.position = _spawnPointPlayer.position;
 
-        // foreach (var obj in _objectsUI)
-        // {
-        //     obj.SetActive(false);
-        // }
         foreach (var obj in _objects)
         {
             obj.GetComponent<RandomPosSpawn>().ChoosePosition();
@@ -95,11 +91,7 @@ public class Manager : MonoBehaviour
         _actualLevel++;
         BlockOrNotChrono(false);
 
-        // if (_actualLevel >= _chrono.Length)
-        //     SceneManager.LoadScene(0);
-        // else
         TransiManager.Instance.LaunchCongrats();
-        // StartScene();
     }
 
     private void UpdateChrono()
@@ -142,6 +134,11 @@ public class Manager : MonoBehaviour
 
         if (_countObj >= 3 && !_hasLost)
             ChangeNextLevel();
+    }
+
+    public int GetActualLevel()
+    {
+        return _actualLevel;
     }
 
     public void BlockOrNotChrono(bool yesOrNot)
