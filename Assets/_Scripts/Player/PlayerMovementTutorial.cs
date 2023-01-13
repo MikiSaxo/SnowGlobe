@@ -53,6 +53,11 @@ public class PlayerMovementTutorial : MonoBehaviour
         _canMove = moveOrNot;
     }
 
+    public void BlockRb()
+    {
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
     private void Update()
     {
         // ground check
