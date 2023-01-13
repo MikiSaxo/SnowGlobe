@@ -5038,19 +5038,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4868462d9c712428348bbe77a5bbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 7
-  _groundDrag: 5
-  _jumpForce: 0
-  _jumpCooldown: 0
-  _airMultiplier: 0
-  walkSpeed: 0
-  sprintSpeed: 0
+  _moveSpeedNormal: 7
+  _groundDragNormal: 5
   _jumpKey: 32
   _playerHeight: 2
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   _orientation: {fileID: 4400332916294967117}
+  audioManager: {fileID: 0}
 --- !u!114 &4400332917331502856
 MonoBehaviour:
   m_ObjectHideFlags: 0

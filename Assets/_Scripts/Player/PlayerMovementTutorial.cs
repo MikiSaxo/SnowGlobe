@@ -11,9 +11,6 @@ public class PlayerMovementTutorial : MonoBehaviour
     [Header("Movement Normal")]
     [SerializeField] private float _moveSpeedNormal;
     [SerializeField] private float _groundDragNormal;
-    [Header("Movement Sprint")]
-    [SerializeField] private float _moveSpeedSprint;
-    [SerializeField] private float _groundDragSprint;
     private float _jumpForce;
     private float _jumpCooldown;
     private float _airMultiplier;
