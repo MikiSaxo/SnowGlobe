@@ -70,6 +70,8 @@ public class TransiManager : MonoBehaviour
 
     private IEnumerator MoveIcon()
     {
+        _fade.DOFade(0, _timeFadeOff).OnComplete(DeactiveFade);
+        
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
 
@@ -144,11 +146,20 @@ public class TransiManager : MonoBehaviour
 
     public void MoreDifficult()
     {
+        StartCoroutine(MoreDifficultAnim());
+    }
+
+    IEnumerator MoreDifficultAnim()
+    {
         GameObject myEventSystem = GameObject.Find("EventSystem");
         myEventSystem .GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        _fade.gameObject.SetActive(true);
+        _fade.DOFade(1, _timeFadeOn);
+        yield return new WaitForSeconds(_timeFadeOn);
         
         _congrat.SetActive(false);
         Manager.Instance.StartScene();
