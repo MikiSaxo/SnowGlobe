@@ -5,9 +5,8 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using TMPro.EditorUtilities;
-using Unity.Collections;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Manager : MonoBehaviour
 {
@@ -22,16 +21,21 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] _objects;
 
     [Header("Chrono")] [SerializeField] private TextMeshProUGUI _chronoText;
+    [SerializeField] private int _firstChrono;
+    [SerializeField] private int _chronoReducePercent;
 
-    [Tooltip("In seconds")] [SerializeField]
-    private float[] _chrono;
+    [Header("Random Spawn Obj")] [SerializeField]
+    private GameObject[] _randomObj;
 
     private float _actualChrono;
+    private float _chronoReduced;
     private int _countObj;
     private int _actualLevel;
 
     private bool _hasLost;
+    private bool _hasWin;
     private bool _blockChrono;
+    private bool _isFirstChrono;
 
     private void Awake()
     {
@@ -40,13 +44,37 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
+        _isFirstChrono = true;
+        _chronoReduced = _firstChrono;
         StartScene();
     }
 
     public void StartScene()
     {
+        if (_isFirstChrono)
+        {
+            _actualChrono = _firstChrono;
+            _isFirstChrono = false;
+        }
+        else
+            _chronoReduced *= 1 - _chronoReducePercent * .01f;
+
+        _actualChrono = _chronoReduced;
+
+        foreach (var obj in _randomObj)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+
+        int random = Random.Range(0, _randomObj.Length);
+        if (_randomObj[random] != null)
+            _randomObj[random].SetActive(true);
+
+        _hasLost = false;
+        _hasWin = false;
+
         _countObj = 0;
-        _actualChrono = _chrono[_actualLevel];
         _chronoText.color = Color.white;
         UpdateChrono();
         _player.transform.position = _spawnPointPlayer.position;
@@ -63,13 +91,14 @@ public class Manager : MonoBehaviour
 
     private void ChangeNextLevel()
     {
+        _hasWin = true;
         _actualLevel++;
         BlockOrNotChrono(false);
 
-        if (_actualLevel >= _chrono.Length)
-            SceneManager.LoadScene(0);
-        else
-            TransiManager.Instance.LaunchCongrats();
+        // if (_actualLevel >= _chrono.Length)
+        //     SceneManager.LoadScene(0);
+        // else
+        TransiManager.Instance.LaunchCongrats();
         // StartScene();
     }
 
@@ -77,10 +106,10 @@ public class Manager : MonoBehaviour
     {
         TimeSpan time = TimeSpan.FromMinutes(_actualChrono);
         var format = time.ToString(@"hh\:mm\:ss");
-        format = format.Substring(3,5);
+        format = format.Substring(3, 5);
         _chronoText.text = format;
-        
-        if(_actualChrono < 5)
+
+        if (_actualChrono < 5)
             _chronoText.color = Color.red;
     }
 
@@ -95,7 +124,7 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            if (_hasLost) return;
+            if (_hasLost || _hasWin) return;
 
             _hasLost = true;
             if (ShakeObj.Instance != null)
@@ -111,7 +140,7 @@ public class Manager : MonoBehaviour
         _objectsUI[index].SetActive(true);
         _countObj++;
 
-        if (_countObj >= 3)
+        if (_countObj >= 3 && !_hasLost)
             ChangeNextLevel();
     }
 
