@@ -22,6 +22,7 @@ public class PlayerMovementTutorial : MonoBehaviour
     [SerializeField] private float _playerHeight;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Transform _orientation;
+    public AudioManager audioManager;
 
     private bool _readyToJump;
     private bool _grounded;
@@ -93,13 +94,15 @@ public class PlayerMovementTutorial : MonoBehaviour
     {
         // calculate movement direction
         _moveDirection = _orientation.forward * _verticalInput + _orientation.right * _horizontalInput;
-
         // on ground
-        if(_grounded)
+        if (_grounded)
+        {
             _rb.AddForce(_moveDirection.normalized * _moveSpeed * 10f, ForceMode.Force);
+        }
+
 
         // in air
-        else if(!_grounded)
+        else if (!_grounded)
             _rb.AddForce(_moveDirection.normalized * _moveSpeed * 10f * _airMultiplier, ForceMode.Force);
     }
 
