@@ -29,7 +29,7 @@ public class Manager : MonoBehaviour
     private float _actualChrono;
     private int _countObj;
     private int _actualLevel;
-    
+
     private bool _hasLost;
     private bool _blockChrono;
 
@@ -47,6 +47,7 @@ public class Manager : MonoBehaviour
     {
         _countObj = 0;
         _actualChrono = _chrono[_actualLevel];
+        UpdateChrono();
         _player.transform.position = _spawnPointPlayer.position;
 
         // foreach (var obj in _objectsUI)
@@ -67,7 +68,15 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene(0);
         else
             TransiManager.Instance.LaunchCongrats();
-            // StartScene();
+        // StartScene();
+    }
+
+    private void UpdateChrono()
+    {
+        TimeSpan time = TimeSpan.FromMinutes(_actualChrono);
+        var format = time.ToString(@"hh\:mm\:ss");
+        format = format.Substring(3,5);
+        _chronoText.text = format;
     }
 
     private void Update()
@@ -75,16 +84,14 @@ public class Manager : MonoBehaviour
         if (_actualChrono > 0)
         {
             if (!_blockChrono) return;
+
             _actualChrono -= Time.deltaTime;
-            TimeSpan time = TimeSpan.FromSeconds(_actualChrono);
-            var format = time.ToString(@"g");
-            format = format.Substring(5, 5);
-            _chronoText.text = format;
+            UpdateChrono();
         }
         else
         {
             if (_hasLost) return;
-            
+
             _hasLost = true;
             if (ShakeObj.Instance != null)
                 ShakeObj.Instance.StartShakingCam(0);
@@ -103,5 +110,8 @@ public class Manager : MonoBehaviour
             ChangeNextLevel();
     }
 
- 
+    public void BlockOrNotChrono(bool yesOrNot)
+    {
+        _blockChrono = yesOrNot;
+    }
 }

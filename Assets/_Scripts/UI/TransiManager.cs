@@ -25,7 +25,6 @@ public class TransiManager : MonoBehaviour
     [SerializeField] private float _timeToMoveIcon;
     [SerializeField] private float _timeGoFade;
     [SerializeField] private float _timeCongratsOff;
-    public AudioManager audioManager;
 
     private List<Vector3> _startPosIconsObj = new List<Vector3>();
 
@@ -63,7 +62,7 @@ public class TransiManager : MonoBehaviour
 
     public void LaunchMoveIcon()
     {
-        audioManager.PlaySound("Decompte ");
+        AudioManager.Instance.PlaySound("Decompte ");
         StartCoroutine(MoveIcon());
     }
 
@@ -94,7 +93,7 @@ public class TransiManager : MonoBehaviour
 
         PlayerCam.Instance.UpdateMove(true);
         PlayerMovementTutorial.Instance.UpdateMove(true);
-
+        Manager.Instance.BlockOrNotChrono(true);
     }
 
     public void ResetPos()
@@ -118,7 +117,7 @@ public class TransiManager : MonoBehaviour
     public void LaunchCongrats()
     {
         _congrat.SetActive(true);
-        audioManager.PlaySound("Win");
+        AudioManager.Instance.PlaySound("Win");
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
         
