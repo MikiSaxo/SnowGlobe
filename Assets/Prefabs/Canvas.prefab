@@ -972,7 +972,8 @@ MonoBehaviour:
   _congratTxt: {fileID: 551724231804597142}
   _congrat: {fileID: 551724232402209705}
   _fail: {fileID: 551724232039414920}
-  _failText: {fileID: 0}
+  _failText: {fileID: 551724232430877790}
+  _stageText: {fileID: 551724231843160090}
   _timeToMoveIcon: 0.5
   _timeGoFade: 1
   _timeCongratsOff: 0.5
@@ -2214,7 +2215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &551724233099900062
 RectTransform:
   m_ObjectHideFlags: 0
