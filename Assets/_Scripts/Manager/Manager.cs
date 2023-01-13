@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour
 {
     public static Manager Instance;
 
+
     [Header("Player")] [SerializeField] private GameObject _player;
     [SerializeField] private Transform _spawnPointPlayer;
 
@@ -26,9 +27,12 @@ public class Manager : MonoBehaviour
 
     [Header("Random Spawn Obj")] [SerializeField]
     private GameObject[] _randomObj;
-    
-    [Header("Stage")] [SerializeField]
-    private TextMeshProUGUI _stageRightCornerText;
+
+    [Header("Stage")] [SerializeField] private TextMeshProUGUI _stageRightCornerText;
+
+    [Header("Snow")] [SerializeField] private GameObject _bigSnow;
+    [SerializeField] private Material _groundSnow;
+    [SerializeField] private float _snowHeight;
 
     private float _actualChrono;
     private float _chronoReduced;
@@ -50,10 +54,13 @@ public class Manager : MonoBehaviour
         _isFirstChrono = true;
         _chronoReduced = _firstChrono;
         StartScene();
+
+        _groundSnow.SetFloat("_SnowHeight", _snowHeight);
     }
 
     public void StartScene()
     {
+        _bigSnow.SetActive(false);
         if (_isFirstChrono)
         {
             _actualChrono = _firstChrono;
@@ -77,7 +84,7 @@ public class Manager : MonoBehaviour
         _hasLost = false;
         _hasWin = false;
 
-        _stageRightCornerText.text = $"Stage : {_actualLevel+1}";
+        _stageRightCornerText.text = $"Stage : {_actualLevel + 1}";
         _countObj = 0;
         _chronoText.color = Color.white;
         UpdateChrono();
@@ -127,7 +134,22 @@ public class Manager : MonoBehaviour
                 ShakeObj.Instance.StartShakingCam(0);
 
             _stageRightCornerText.DOFade(0, 1);
+            _bigSnow.SetActive(true);
+            StartCoroutine(IncreaseSnowHeight());
             TransiManager.Instance.LaunchFail();
+        }
+    }
+
+    IEnumerator IncreaseSnowHeight()
+    {
+        yield return new WaitForSeconds(2f);
+
+        var bigSnowHeigt = _snowHeight;
+        for (float i = _snowHeight; i < .9f; i += .01f)
+        {
+            bigSnowHeigt += .01f;
+            _groundSnow.SetFloat("_SnowHeight", bigSnowHeigt);
+            yield return new WaitForSeconds(.03f);
         }
     }
 

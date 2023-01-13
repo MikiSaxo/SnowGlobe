@@ -8,15 +8,19 @@ public class PlayerMovementTutorial : MonoBehaviour
 {
     public static PlayerMovementTutorial Instance;
     
-    [Header("Movement")]
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _groundDrag;
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private float _jumpCooldown;
-    [SerializeField] private float _airMultiplier;
+    [Header("Movement Normal")]
+    [SerializeField] private float _moveSpeedNormal;
+    [SerializeField] private float _groundDragNormal;
+    [Header("Movement Sprint")]
+    [SerializeField] private float _moveSpeedSprint;
+    [SerializeField] private float _groundDragSprint;
+    private float _jumpForce;
+    private float _jumpCooldown;
+    private float _airMultiplier;
 
     [Header("Keybinds")]
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
+    // [SerializeField] private KeyCode _sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     [SerializeField] private float _playerHeight;
@@ -24,6 +28,9 @@ public class PlayerMovementTutorial : MonoBehaviour
     [SerializeField] private Transform _orientation;
     public AudioManager audioManager;
 
+    private float _moveSpeed;
+    private float _groundDrag;
+    
     private bool _readyToJump;
     private bool _grounded;
     private bool _canMove;
@@ -44,7 +51,8 @@ public class PlayerMovementTutorial : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
-
+        _moveSpeed = _moveSpeedNormal;
+        _groundDrag = _groundDragNormal;
         _readyToJump = true;
     }
     
@@ -93,6 +101,17 @@ public class PlayerMovementTutorial : MonoBehaviour
 
             Invoke(nameof(ResetJump), _jumpCooldown);
         }
+
+        // if (Input.GetKey(_sprintKey))
+        // {
+        //     _moveSpeed = _moveSpeedSprint;
+        //     _groundDrag = _groundDragSprint;
+        // }
+        // else
+        // {
+        //     _moveSpeed = _moveSpeedNormal;
+        //     _groundDrag = _groundDragNormal;
+        // }
     }
 
     private void MovePlayer()
