@@ -70,6 +70,11 @@ public class TransiManager : MonoBehaviour
 
     private IEnumerator MoveIcon()
     {
+        foreach (var icon in _iconsObj) // Security
+        {
+            icon.GetComponent<Image>().DOFade(1, 1f);
+        }
+        
         _fade.DOFade(0, _timeFadeOff).OnComplete(DeactiveFade);
         
         PlayerCam.Instance.UpdateMove(false);

@@ -26,6 +26,9 @@ public class Manager : MonoBehaviour
 
     [Header("Random Spawn Obj")] [SerializeField]
     private GameObject[] _randomObj;
+    
+    [Header("Stage")] [SerializeField]
+    private TextMeshProUGUI _stageRightCornerText;
 
     private float _actualChrono;
     private float _chronoReduced;
@@ -74,6 +77,7 @@ public class Manager : MonoBehaviour
         _hasLost = false;
         _hasWin = false;
 
+        _stageRightCornerText.text = $"Stage : {_actualLevel+1}";
         _countObj = 0;
         _chronoText.color = Color.white;
         UpdateChrono();
@@ -122,6 +126,7 @@ public class Manager : MonoBehaviour
             if (ShakeObj.Instance != null)
                 ShakeObj.Instance.StartShakingCam(0);
 
+            _stageRightCornerText.DOFade(0, 1);
             TransiManager.Instance.LaunchFail();
         }
     }
