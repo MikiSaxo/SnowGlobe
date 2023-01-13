@@ -43,12 +43,12 @@ public class TransiManager : MonoBehaviour
         GetObjStartPos();
         LaunchMoveIcon();
     }
-    
+
     private void DeactiveFade()
     {
         ActiveOrNotFade(false);
     }
-    
+
     private void ActiveOrNotFade(bool which)
     {
         _fade.gameObject.SetActive(which);
@@ -74,9 +74,9 @@ public class TransiManager : MonoBehaviour
         {
             icon.GetComponent<Image>().DOFade(1, 1f);
         }
-        
+
         _fade.DOFade(0, _timeFadeOff).OnComplete(DeactiveFade);
-        
+
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
 
@@ -125,15 +125,15 @@ public class TransiManager : MonoBehaviour
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.BlockRb();
-        
+
         yield return new WaitForSeconds(1f);
         _failText.DOFade(1, 1);
         yield return new WaitForSeconds(1f);
-        _stageText.text = $"Stage : {Manager.Instance.GetActualLevel()+1}";
+        _stageText.text = $"Stage : {Manager.Instance.GetActualLevel() + 1}";
         _stageText.DOFade(1, 1);
         _fail.SetActive(true);
 
-        
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -144,7 +144,7 @@ public class TransiManager : MonoBehaviour
         AudioManager.Instance.PlaySound("Win");
         PlayerCam.Instance.UpdateMove(false);
         PlayerMovementTutorial.Instance.UpdateMove(false);
-        
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -157,18 +157,18 @@ public class TransiManager : MonoBehaviour
     IEnumerator MoreDifficultAnim()
     {
         GameObject myEventSystem = GameObject.Find("EventSystem");
-        myEventSystem .GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-        
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         _fade.gameObject.SetActive(true);
         _fade.DOFade(1, _timeFadeOn);
         yield return new WaitForSeconds(_timeFadeOn);
-        
+
         _congrat.SetActive(false);
         Manager.Instance.StartScene();
-        
+
         ResetPos();
         LaunchMoveIcon();
     }

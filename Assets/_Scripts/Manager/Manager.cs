@@ -145,11 +145,11 @@ public class Manager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         var bigSnowHeigt = _snowHeight;
-        for (float i = _snowHeight; i < .9f; i += .01f)
+        for (float i = _snowHeight; i < .8f; i += .01f)
         {
             bigSnowHeigt += .01f;
             _groundSnow.SetFloat("_SnowHeight", bigSnowHeigt);
-            yield return new WaitForSeconds(.03f);
+            yield return new WaitForSeconds(.05f);
         }
     }
 
